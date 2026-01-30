@@ -4,3 +4,4 @@ pyinstaller
 pyperclip
 httpx[socks]
 keyboard
+plyer
