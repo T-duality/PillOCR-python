@@ -1,5 +1,4 @@
 <div align="center">
-<img src="https://picsur.zzwu.xyz/i/f36fa6f7-59fd-4612-9955-41064f8b468e.jpg" style="width:80px; height:auto;" alt="image">
 <h1>PillOCR</h1>
 一个接近无感的OCR工具<br><br>
 </div>
