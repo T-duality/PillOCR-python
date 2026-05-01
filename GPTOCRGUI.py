@@ -164,9 +164,10 @@ class ImageToMarkdown:
 
         base64_img = f"data:image/png;base64,{self.image_encoder.encode_image(image)}"
 
-        response = self.client.chat.completions.create(
-            model=self.gpt_model,
-            messages=[
+        # 构建请求参数
+        request_params = {
+            "model": self.gpt_model,
+            "messages": [
                 {"role": "system", "content": self.system_prompt},
                 {
                     "role": "user",
@@ -176,9 +177,17 @@ class ImageToMarkdown:
                     ],
                 },
             ],
-            max_tokens=self.max_tokens,
-            timeout=self.timeout,
-        )
+            "max_tokens": self.max_tokens,
+            "timeout": self.timeout,
+        }
+
+        # 火山引擎：禁用思考模式
+        if self.current_provider == "火山引擎":
+            request_params["extra_body"] = {
+                "thinking": {"type": "disabled"}
+            }
+
+        response = self.client.chat.completions.create(**request_params)
         # debug用
         # print(response)
         markdown_content = response.choices[0].message.content
